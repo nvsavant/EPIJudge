@@ -17,15 +17,28 @@ int ZeroOneRandom() {
 }
 
 int UniformRandom(int lower_bound, int upper_bound) {
-  // TODO - you fill in here.
-  return 0;
+    int numOfOutComes = upper_bound - lower_bound + 1;
+    int result = 0;
+    
+    if(numOfOutComes == 1) {
+        return ZeroOneRandom() + lower_bound;
+    }
+    
+    do {
+        result = 0;
+        for (int i = 0; (1 << i) < upper_bound; ++i) {
+            result = (result << 1) | ZeroOneRandom();
+        }
+    } while (result >= numOfOutComes);
+    
+    return result + lower_bound;
 }
 bool UniformRandomRunner(TimedExecutor& executor, int lower_bound,
                          int upper_bound) {
   using namespace test_framework;
   vector<int> result;
   executor.Run([&] {
-    std::generate_n(back_inserter(result), 100000,
+    std::generate_n(back_inserter(result), 10,
                     std::bind(UniformRandom, lower_bound, upper_bound));
   });
 
