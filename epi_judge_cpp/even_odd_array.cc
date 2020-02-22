@@ -7,8 +7,28 @@
 using std::vector;
 
 void EvenOdd(vector<int>* A_ptr) {
-  // TODO - you fill in here.
-  return;
+    vector<int>& A = *A_ptr;
+    int evenIdx = 0;
+    int oddIdx = A.size() - 1;
+    
+    while (evenIdx < oddIdx) {
+        while (A[evenIdx] % 2 == 0) {
+            evenIdx++;
+        }
+        
+        while (A[oddIdx] % 2 == 1) {
+            oddIdx--;
+        }
+        
+        int tmp = A[evenIdx];
+        A[evenIdx] = A[oddIdx];
+        A[oddIdx] = tmp;
+        
+        evenIdx++;
+        oddIdx--;
+    }
+    
+    return;
 }
 void EvenOddWrapper(TimedExecutor& executor, vector<int> A) {
   std::multiset<int> before(begin(A), end(A));
