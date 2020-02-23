@@ -2,10 +2,35 @@
 
 #include "test_framework/generic_test.h"
 using std::vector;
+bool isPrime(int n) {
+    if(n <= 1) {
+        return false;
+    }
+    
+    if(n == 2 || n == 3) {
+        return true;
+    }
+    
+    for (int i = 2; i <= sqrt(n); i++) {
+        if(n % i == 0) {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
 // Given n, return all primes up to and including n.
 vector<int> GeneratePrimes(int n) {
   // TODO - you fill in here.
-  return {};
+    vector<int> retVec;
+    for (int i = 1; i <= n; i++) {
+        if(isPrime(i)) {
+            retVec.push_back(i);
+        }
+    }
+    
+    return retVec;
 }
 
 int main(int argc, char* argv[]) {
