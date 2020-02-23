@@ -4,14 +4,16 @@
 #include "test_framework/generic_test.h"
 using std::vector;
 double BuyAndSellStockOnce(const vector<double>& prices) {
-    double maxProfit = DBL_MIN;
+    double maxProfit = 0;
+    double minVal = DBL_MAX;
     
-    for(int i = 0; i < prices.size() - 1; i++) {
-        for (int j = i + 1; j < prices.size(); j++) {
-            if(prices[j] - prices[i] > maxProfit) {
-                maxProfit = prices[j] - prices[i];
-            }
+    for(int i = 0; i < prices.size(); i++) {
+        if(prices[i] < minVal) {
+            minVal = prices[i];
+            continue;
         }
+        
+        maxProfit = fmax(maxProfit, prices[i] - minVal);
     }
     
     return maxProfit;
