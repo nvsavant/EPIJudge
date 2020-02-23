@@ -3,8 +3,25 @@
 #include "test_framework/generic_test.h"
 using std::vector;
 void RotateMatrix(vector<vector<int>>* square_matrix_ptr) {
-  // TODO - you fill in here.
-  return;
+    vector<vector<int>>& A = *square_matrix_ptr;
+    
+    //Transpose
+    for (int i = 0; i < A.size(); i++) {
+        for (int j = 0; j < A[i].size(); j++) {
+            if(i > j) {
+                std::swap(A[i][j], A[j][i]);
+            }
+        }
+    }
+    
+    //Swap colums
+    for (int i = 0; i < A.size(); i++) {
+        for (int j = 0; j < A[i].size() / 2; j++) {
+            std::swap(A[i][j], A[i][A[i].size() - 1 - j]);
+        }
+    }
+        
+    return;
 }
 vector<vector<int>> RotateMatrixWrapper(vector<vector<int>> square_matrix) {
   RotateMatrix(&square_matrix);
